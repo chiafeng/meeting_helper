@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Homepage</title>
+	</head>
+	<body>
+		<form id="upload-form" action="{{ url_for('result') }}" method="POST" enctype="multipart/form-data">
+			<input id="picker" type="file" name="file">
+			<input id="upload-button" type="submit" value="upload">
+		</form>
+	</body>
+</html>

@@ -1,0 +1,8 @@
+A web page to accept a file and process it.
+
+Usage: python3 app.py
+
+Requirments:
+* Flask
+	Install steps:
+		1. pip3 install Flask"
