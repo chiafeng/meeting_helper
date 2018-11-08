@@ -1,8 +1,20 @@
 A web page to accept a file and process it.
 
-Usage: python3 app.py
+Usage:
+ export GOOGLE_APPLICATION_CREDENTIALS="YOUR_CREDENTIAL_PATH"
+ ./app.py
 
 Requirments:
+* GOOGLE_APPLICATION_CREDENTIALS file
 * Flask
 	Install steps:
 		1. pip3 install Flask
+* Cloud Storage Client Libraries
+	Install steps:
+		1. pip3 install --upgrade google-cloud-storage
+* Speech-to-Text Client Libraries
+	Install steps:
+		1. pip3 install --upgrade google-cloud-speech
+* Natural Language API Client Libraries
+	Install steps:
+		1. pip3 install --upgrade google-cloud-language

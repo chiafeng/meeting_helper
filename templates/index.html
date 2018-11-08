@@ -2,31 +2,11 @@
 <html>
 	<head>
 		<title>Homepage</title>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<!-- wordcloud2 open source: "https://github.com/timdream/wordcloud" -->
-		<script type=text/javascript src="{{ url_for('static', filename='wordcloud2.js') }}"></script>
 	</head>
 	<body>
 		<form id="upload-form" action="{{ url_for('result') }}" method="POST" enctype="multipart/form-data">
 			<input id="picker" type="file" name="file">
 			<input id="upload-button" type="submit" value="upload">
 		</form>
-		<canvas id="canvas" class="canvas" width="800px" height="600px"></canvas>
-		<div id="canvas2" class="canvas" width="800px" height="600px"></div>
-		<script>
-			var isSup = WordCloud.isSupported;
-			var $cloud1 = $('#canvas');
-			var $cloud2 = $('#canvas2');
-
-			// set options for WordCloud2
-			var options = {};
-			// weightFactor: function to call or number to multiply for size of each word in the list.
-			options.weightFactor = 2;
-			options.backgroundColor = "#C1FCFF"
-			// list: List of words/text to paint on the canvas in a 2-d array, in the form of [word, size], e.g. [['foo', 12], ['bar', 6]].
-			options.list = {{ mapping|safe }};
-
-			WordCloud([$cloud1[0], $cloud2[0]], options );
-		</script>
 	</body>
 </html>
