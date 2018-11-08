@@ -5,4 +5,4 @@ Usage: python3 app.py
 Requirments:
 * Flask
 	Install steps:
-		1. pip3 install Flask"
+		1. pip3 install Flask
