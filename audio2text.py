@@ -57,7 +57,8 @@ def transcribe_gcs(gcs_uri):
         config = types.RecognitionConfig(
             encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
             sample_rate_hertz=44100,
-            language_code='cmn-Hant-TW')
+            language_code='en-US')
+            #language_code='cmn-Hant-TW')
 
         operation = client.long_running_recognize(config, audio)
 

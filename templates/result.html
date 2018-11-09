@@ -6,8 +6,21 @@
 		<!-- wordcloud2 open source: "https://github.com/timdream/wordcloud" -->
 		<script type=text/javascript src="{{ url_for('static', filename='wordcloud2.js') }}"></script>
 		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/all.css') }}">
+
+		<script type="text/javascript">
+			function ask_result() {
+				$.getJSON("/process",
+						  function(data) {
+						  	$.each(data, function(key, val){
+						  		$('#status').text(val);
+						  	})
+						  });
+			}
+			var timer = setInterval(ask_result, 1000);
+		</script>
 	</head>
 	<body>
+		<span id="status">status</span>
 		<main>
 			<section class="section-stories">
 				<div class="bg-video">
@@ -50,7 +63,7 @@
                                     <span class="card__heading-span card__heading-span--3">Record</span>
                                 </h4>
                                 <div class="card__details">
-                                    <div>{{org_text|safe}}</div>
+                                    <div id="orig_text">{{ origin_text|safe }}</div>
                                 </div>
                            </div>
                            <div class="card__side card__side--back card__side--back-3">
@@ -67,7 +80,6 @@
 				</div>
 			</section>
 		</main>
-		
 		<script>
 			var isSup = WordCloud.isSupported;
 			var $cloud1 = $('#canvas');
@@ -76,10 +88,18 @@
 			// set options for WordCloud2
 			var options = {};
 			// weightFactor: function to call or number to multiply for size of each word in the list.
-			options.weightFactor = 2;
+			options.weightFactor = 20;
+			// drawOutOfBound: set to true to allow word being draw partly outside of the canvas. Allow word bigger than the size of the canvas to be drawn.
+			options.drawOutOfBound = true;
 			//options.backgroundColor = "#C1FCFF"
 			// list: List of words/text to paint on the canvas in a 2-d array, in the form of [word, size], e.g. [['foo', 12], ['bar', 6]].
 			options.list = {{ mapping|safe }};
+			options.click = function(item, dimension, event) {
+				var text = $('#orig_text').text();
+				var re = new RegExp(item[0], 'g');
+				text = text.replace(re, "<mark>" + item[0] + "</mark>");
+				$('#orig_text').html(text);
+			}
 
 			WordCloud([$cloud1[0], $cloud2[0]], options );
 		</script>
