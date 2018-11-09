@@ -5,10 +5,69 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<!-- wordcloud2 open source: "https://github.com/timdream/wordcloud" -->
 		<script type=text/javascript src="{{ url_for('static', filename='wordcloud2.js') }}"></script>
+		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/all.css') }}">
 	</head>
 	<body>
-		<canvas id="canvas" class="canvas" width="800px" height="600px"></canvas>
-		<div id="canvas2" class="canvas" width="800px" height="600px"></div>
+		<main>
+			<section class="section-stories">
+				<div class="bg-video">
+                    <video class="bg-video__content" autoplay="" muted="" loop="">
+                        <source src="{{ url_for('static', filename='img/video.mp4') }}" type="video/mp4">
+                        <source src="{{ url_for('static', filename='img/video.webm') }}m" type="video/webm">
+                        Your browser is not supported!
+                    </video>
+                </div>
+				<div class="u-center-text">
+                    <h1 class="heading-secondary">{{fname|safe}}</h1>
+                </div>
+				<div class="row">
+					<div class="col-2-of-3">
+						<div class="card">
+                           <div class="card__side card__side--front">
+                                <h4 class="card__heading">
+                                    <span class="card__heading-span card__heading-span--2">Point</span>
+                                </h4>
+                                <div class="card__details">
+                                    <div id="canvas2" class="canvas" width="800px" height="600px" style="display:none;"></div>
+                                    <canvas id="canvas" class="canvas" width="800px" height="600px" ></canvas>
+                                </div>
+                           </div>
+                           <div class="card__side card__side--back card__side--back-2">
+                                <div class="card__cta">
+                                    <div class="card__price-box">
+                                        <p class="card__price-value">Is it ?</p>
+                                        <p class="card__price-only">Cry with laugh..</p>
+                                    </div>
+                                    <a href="#popup" class="btn btn--white">Back</a>
+                                </div>
+                            </div>
+                       </div>
+					</div>
+					<div class="col-1-of-3">
+						<div class="card">
+                           <div class="card__side card__side--front">
+                                <h4 class="card__heading">
+                                    <span class="card__heading-span card__heading-span--3">Record</span>
+                                </h4>
+                                <div class="card__details">
+                                    <div>{{org_text|safe}}</div>
+                                </div>
+                           </div>
+                           <div class="card__side card__side--back card__side--back-3">
+                                <div class="card__cta">
+                                    <div class="card__price-box">
+                                        <p class="card__price-value">Blablabla</p>
+                                        <p class="card__price-only">Cry with laugh..</p>
+                                    </div>
+                                    <a href="#popup" class="btn btn--white">Back</a>
+                                </div>
+                            </div>
+                       </div>
+					</div>
+				</div>
+			</section>
+		</main>
+		
 		<script>
 			var isSup = WordCloud.isSupported;
 			var $cloud1 = $('#canvas');
@@ -17,7 +76,7 @@
 			// set options for WordCloud2
 			var options = {};
 			// weightFactor: function to call or number to multiply for size of each word in the list.
-			options.weightFactor = 20;
+			options.weightFactor = 2;
 			//options.backgroundColor = "#C1FCFF"
 			// list: List of words/text to paint on the canvas in a 2-d array, in the form of [word, size], e.g. [['foo', 12], ['bar', 6]].
 			options.list = {{ mapping|safe }};
